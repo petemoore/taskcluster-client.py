@@ -125,8 +125,17 @@ def makeHttpRequest(method, url, payload, headers, retries=MAX_RETRIES):
 
 
 def makeSingleHttpRequest(method, url, payload, headers):
-  log.debug('Making a %s request to %s', method, url)
-  return requests.request(method.upper(), url, data=payload, headers=headers)
+  log.debug('Making a %s request to %s', method.upper(), url)
+  log.debug('Sending HTTP request headers:')
+  log.debug(headers)
+  log.debug('Sending HTTP request payload:')
+  log.debug(payload)
+  response = requests.request(method.upper(), url, data=payload, headers=headers)
+  log.debug('Received HTTP response headers:')
+  log.debug(response.headers)
+  log.debug('Received HTTP response body:')
+  log.debug(response.text)
+  return response
 
 
 def putFile(filename, url, contentType):
